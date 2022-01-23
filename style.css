@@ -4,11 +4,14 @@
   padding: 0;
 }
 
-img,
-svg {
+img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+svg {
+  display: block;
 }
 
 picture {
@@ -47,12 +50,15 @@ h2 {
 
 p {
   font-size: 1.8rem;
-  color: #808397;
+  line-height: 1.6;
 }
 
 header {
   padding: 2rem;
   background-color: #49bcf2;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 }
 
 header .Contain {
@@ -70,15 +76,50 @@ header svg path {
   margin: 0 auto;
 }
 
+.MainNavigation {
+  position: relative;
+}
+
 .MainNavigation ul {
   display: none;
+  opacity: 0;
   list-style-type: none;
   align-items: center;
+  position: absolute;
+  top: 100%;
+  right: 1rem;
+  background-color: #fff;
+  flex-direction: column;
+  min-width: calc(100vw - 5rem);
+  transform: translate(0, 5rem);
+  padding: 2rem;
+  transition: opacity 0.5s ease;
+}
+
+.MainNavigation ul.is-visible {
+  display: flex;
+}
+
+.MainNavigation ul.is-active {
+  opacity: 1;
+}
+
+.MainNavigation ul::before {
+  display: block;
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 24L24 0V24H0Z' fill='white'/%3E%3C/svg%3E");
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-100%);
 }
 
 .MainNavigation ul a {
   display: block;
   padding: 0.8rem 1.5rem;
+  margin: 1rem 0;
   font-size: 1.8rem;
   color: #262626;
   text-decoration: none;
@@ -97,7 +138,7 @@ header svg path {
   font-size: 1.5rem;
   text-transform: uppercase;
   color: #24303e;
-  background-color: #fff;
+  background-color: #fbd600;
   border-radius: 2.8rem;
   padding: 2rem 3rem;
   transition: color 0.3s ease-out, background-color 0.3s ease-out;
@@ -106,7 +147,7 @@ header svg path {
 .MainNavigation .Contact:focus,
 .MainNavigation .Contact:hover {
   color: #fff;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #49bcf2;
   text-decoration: none;
 }
 
@@ -157,26 +198,53 @@ button {
   object-fit: cover;
 }
 
-.Card a {
-  text-transform: uppercase;
-  color: #24303e;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-    drop-shadow(0px 4px 4px #fad400);
-
-  font-size: 15px;
-}
-
 .Card > div {
   display: grid;
   text-align: center;
   align-content: center;
+  justify-items: center;
   padding: 5rem 0;
   max-width: 70%;
 }
 
 .Card > div p {
   margin: 2rem 0;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+.Card a {
+  font-family: "Fraunces", serif;
+  text-decoration: none;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #24303e;
+  position: relative;
+}
+
+.Card a::after {
+  content: "";
+  display: block;
+  height: 10px;
+  background-color: #fad400;
+  opacity: 0.2;
+  width: 120%;
+  border-radius: 1rem;
+  margin-top: -0.8rem;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: -1;
+}
+
+.Card a:hover::after,
+.Card a:focus-visible::after {
+  opacity: 1;
+}
+
+.Card:nth-child(3) a::after {
+  background-color: #fe7766;
 }
 
 .Works {
@@ -229,6 +297,110 @@ button {
   color: inherit;
 }
 
+.Testimonials {
+  text-align: center;
+  margin: 10rem 0;
+}
+
+.Testimonials h2 {
+  margin: 5rem 0;
+}
+
+.Testimonials .Contain {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.Testimonials figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem;
+}
+
+.Testimonials blockquote {
+  flex-grow: 1;
+  margin: 3rem 0;
+}
+
+.Testimonials img {
+  border-radius: 50%;
+}
+
+.Testimonials cite {
+  display: block;
+  font-family: "Barlow", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  color: #a7aaad;
+}
+
+.Testimonials figcaption {
+  font-size: 1.8rem;
+  font-family: "Fraunces", serif;
+  line-height: 2;
+}
+
+.Pictures {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Pictures picture {
+  flex-basis: 50%;
+}
+
+.Pictures img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+footer {
+  padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #90d4c6;
+  color: #2c7566;
+}
+footer nav:first-of-type {
+  margin: 5rem 0;
+}
+
+footer nav ul {
+  display: flex;
+  list-style-type: none;
+}
+
+footer li svg {
+  flex-grow: 1;
+}
+
+footer a {
+  display: block;
+  color: #2c7566;
+  padding: 0 2rem;
+  font-size: 1.8rem;
+  text-decoration: none;
+  transition: color 0.3s ease-out;
+}
+
+footer path {
+  transition: fill 0.3s ease-out;
+}
+
+footer a:focus-visible,
+footer a:hover {
+  color: #fff;
+}
+
+footer a:focus-visible path,
+footer a:hover path {
+  fill: #fff;
+}
+
 @media (min-width: 30em) {
   .Works {
     grid-template-columns: 1fr 1fr;
@@ -236,6 +408,7 @@ button {
 
   .Works .Card > div {
     padding-top: 100%;
+    justify-items: center;
   }
 }
 
@@ -250,7 +423,30 @@ button {
   }
 
   .MainNavigation ul {
+    all: revert;
     display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .MainNavigation ul::before {
+    display: none;
+  }
+
+  .MainNavigation .Contact {
+    background-color: #fff;
+    margin-left: 2rem;
+  }
+
+  .MainNavigation .Contact:focus,
+  .MainNavigation .Contact:hover {
+    background-color: #000;
+  }
+
+  .Hero {
+    padding-top: 5rem;
   }
 
   .Hero img {
@@ -272,6 +468,35 @@ button {
   .Card > div {
     aspect-ratio: initial;
     text-align: left;
+    justify-items: start;
+  }
+
+  .Pictures {
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  .Pictures img {
+    max-width: 36rem;
+  }
+
+  .Pictures picture {
+    flex-basis: auto;
+  }
+}
+
+@media (min-width: 50em) {
+  .Testimonials {
+    margin: 15rem 0;
+  }
+
+  .Testimonials .Contain {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  .Testimonials figure {
+    margin: 3rem 5rem;
   }
 }
 
